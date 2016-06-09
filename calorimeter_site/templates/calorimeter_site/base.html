@@ -1,0 +1,103 @@
+{% block doctype %}
+{% endblock %}
+
+{% load bootstrap3 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% bootstrap_messages %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Calorimeter</title>
+
+	<style type="text/css">
+		#page {
+			width: 1100px;
+			text-align: left;
+			margin: 10px auto 20px auto;
+		}
+
+		#sidebar {
+			float: left;
+			width: 200px;
+			border: 1px solid;
+			margin-left: 20px;
+			margin-top: 20px;
+		}
+
+		#content {
+			float: left;
+			width: 600px;
+			border: 1px solid;
+			padding: 10px;	
+			margin-left: 20px;
+			margin-top: 20px;
+		}
+	</style> 
+
+	<!-- Bootstrap core CSS -->
+    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="dashboard.css" rel="stylesheet">
+</head>
+
+<body>
+	<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        
+		<div class="container-fluid">
+	        <div class="navbar-header">
+	          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	            <span class="sr-only">Toggle navigation</span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	          </button>
+	          <a class="navbar-brand" href="#">Calorimeter</a>
+	        </div>
+	        <div class="navbar-collapse collapse">
+	          <ul class="nav navbar-nav navbar-right">
+	            <li><a href="{% url 'calorimeter_site:profile' %}">My Profile</a></li>
+	            <li><a href="{% url 'calorimeter_site:password_change' %}">Change Password</a></li>
+	            <li><a href="{% url 'calorimeter_site:about' %}">About Us</a></li>
+	            {% block login %}
+					{% if user.is_authenticated %}
+						<li><a href="{% url 'calorimeter_site:logout' %}">Logout ({{ user.username }})</a></li>
+					{% else %}
+						<li><a href="{% url 'calorimeter_site:login' %}">Login</a></li>
+					{% endif %}
+				{% endblock %}
+	          </ul>
+	        </div>
+      	</div>
+
+	</div>
+
+	<div id="page" class="row">
+
+		<hr/>
+
+		<div id="sidebar">
+	        {% block sidebar %}
+	        <ul class="nav nav-sidebar">
+	            <li><a href="{% url 'calorimeter_site:index' %}">Home</a></li>
+		    	<li><a href="{% url 'calorimeter_site:food_search' %}">Food Search</a></li>
+	            <li><a href="{% url 'calorimeter_site:meal_plan_search' %}">Meal Plan</a></li>
+	            <li><a href="{% url 'calorimeter_site:nutrition' %}">Nutrition</a></li>
+	            <li><a href="{% url 'calorimeter_site:grocery_store_locator' %}">Grocery Store Locator</a></li>
+	        </ul>
+	        {% endblock %}
+		</div>
+
+		<div id="content">
+	        {% block content %}
+			{% endblock %}
+		</div>
+
+	</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/docs.min.js"></script>
+</body>
+</html>

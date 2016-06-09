@@ -1,0 +1,24 @@
+{% extends "calorimeter_site/base.html" %}
+
+{% block doctype %}
+
+{% load bootstrap3 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% bootstrap_messages %}
+
+{% endblock %}
+
+{% block content %}
+	<div class="jumbotron">
+		<div class="container">
+			<h1>Welcome to Calorimeter!</h1>
+			<p>
+				This is a site dedicated to promoting a healthy lifestyle. 
+			</p>
+			<p>
+				<a class="btn btn-primary btn-lg" role="button">Learn more</a>
+			</p>
+		</div>
+	</div>
+{% endblock %}

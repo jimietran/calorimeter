@@ -1,0 +1,76 @@
+{% block doctype %}
+{% endblock %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Calorimeter</title>
+
+	<style type="text/css">
+		#page {
+			width: 1100px;
+			text-align: left;
+			margin: 10px auto 20px auto;
+		}
+
+		#login {
+			width: 1100px;
+			text-align: left;
+			margin: 10px;
+		}
+
+		#sidebar {
+			float: left;
+			width: 200px;
+			border: 1px solid;
+		}
+
+		#content {
+			float: left;
+			width: 600px;
+			border: 1px solid;
+			padding: 10px;	
+			margin-left: 10px;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="login">
+        {% block login %}
+			{% if user.is_authenticated %}
+				<p>Logged in as {{ user.username }}, <a href="{% url 'calorimeter_site:logout' %}">Logout</a></p>
+			{% else %}
+				<p>Not logged in, <a href="{% url 'calorimeter_site:login' %}">Login</a></p>
+			{% endif %}
+	{% endblock %}
+	</div>
+
+	<div id="page">
+
+	<hr/>
+
+	<div id="sidebar">
+        {% block sidebar %}
+		<p>&nbsp;&nbsp;&nbsp;Sidebar</p>
+        <ul>
+            <li><a href="{% url 'calorimeter_site:index' %}">Home</a></li>
+	    <li><a href="{% url 'calorimeter_site:food_search' %}">Food Search</a></li>
+            <li><a href="{% url 'calorimeter_site:meal_plan_search' %}">Meal Plan</a></li>
+            <li><a href="{% url 'calorimeter_site:nutrition' %}">Nutrition</a></li>
+            <li><a href="{% url 'calorimeter_site:grocery_store_locator' %}">Grocery Store Locator</a></li>
+	    <li><a href="{% url 'calorimeter_site:profile' %}">My Profile</a></li>
+		<li><a href="{% url 'calorimeter_site:password_change' %}">Change Password</a></li>
+
+        </ul>
+        {% endblock %}
+	</div>
+
+	<div id="content">
+        {% block content %}
+		{% endblock %}
+	</div>
+
+	</div>
+</body>
+</html>

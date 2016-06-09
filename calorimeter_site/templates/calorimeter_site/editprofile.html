@@ -1,0 +1,14 @@
+{% extends "calorimeter_site/base.html" %}
+
+{% block content %}
+	<h1>Edit Profile</h1>
+
+	<form method="POST" action="{% url 'calorimeter_site:editprofile' %}">
+    	{% csrf_token %}
+		<p>Username: {{ user.username }}</p>
+		<p>Password: ******</p>
+    	{{userprofileform.as_p}}
+    <input type="submit" name="submit" value="Finish" />
+</form>
+
+{% endblock %}

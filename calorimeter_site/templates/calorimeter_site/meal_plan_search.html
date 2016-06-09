@@ -1,0 +1,64 @@
+{% extends "calorimeter_site/base.html" %}
+
+{% block doctype %}
+
+{% load bootstrap3 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% bootstrap_messages %}
+
+{% endblock %}
+
+{% block content %}
+	<h1>Search Meal Plans</h1>
+	<hr>
+
+	<div class="col-md-12">
+	<form method="GET" action="{% url 'calorimeter_site:meal_plan_detail' %}">
+	{% csrf_token %}
+		<!-- Show error message if search returns nothing -->
+		{% if error_message %}
+			<div id="errormessage" class="col-md-8 ">
+				<p class="bg-danger">{{ error_message }}</p>
+			</div>
+		{% endif %}
+		
+		<div class="col-md-8">
+		<select name="meal_types" class="form-control">
+			<option value="">Meal Type..</option>
+			<option value="Appetizer">Appetizer</option>
+			<option value="Main Dish">Main Dish</option>
+			<option value="Side Dish">Side Dish</option>
+			<option value="Dessert">Dessert</option>
+			<option value="Snack">Snack</option>
+		</select>
+		</div>
+
+		<br>
+
+		<div class="col-md-8">
+		<select name="max_results" class="form-control">
+			<option value="">Show..</option>
+			<option value="1">1 result</option>
+			<option value="2">2 results</option>
+			<option value="3">3 results</option>
+			<option value="4">4 results</option>
+			<option value="5">5 results</option>
+		</select>
+		</div>
+
+		<br>
+
+		<div class="col-md-8">
+			<div class="input-group">
+				<input type="text" name="mealquery" placeholder="Search meals.." class="form-control">
+				<span class="input-group-btn">
+					<button class="btn btn-default" type="submit" name="submit">Search</button>
+				</span>
+			</div>
+			<span class="help-block">Enter an ingredient name, keyword or type. Please be specific.
+			</span>
+		</div>
+	</form>
+	</div>
+{% endblock %}

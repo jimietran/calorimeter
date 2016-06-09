@@ -1,0 +1,20 @@
+{% extends "calorimeter_site/base.html" %}
+
+{% block content %}
+
+	<h1>Login</h1>
+
+	<form action="{% url 'calorimeter_site:auth_view' %}" method="post">{% csrf_token %}
+		<label for="username">Username:</label>
+		<input type="text" name="username" value="" id="username">
+		<p>
+		<label for="password">Password:</label>
+		<input type="password" name="password" value="" id="password">
+		<p>
+
+	<input type="submit" value="Login" />
+	</form>
+
+	<p>Don't have an account? Click <a href="{% url 'calorimeter_site:register' %}">here</a> to register!</p>
+
+{% endblock %}

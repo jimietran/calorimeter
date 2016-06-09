@@ -1,0 +1,105 @@
+{% extends "calorimeter_site/base.html" %}
+
+{% block doctype %}
+
+{% load bootstrap3 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% bootstrap_messages %}
+
+{% endblock %}
+
+{% block content %}
+
+	<h1>{{ meals.recipe.recipe_name }}</h1>
+	<hr>
+	
+	{% if meals %}
+		<div class="col-md-12">
+			<div class="col-md-2">
+				<img src="{{meals.recipe.recipe_images.recipe_image}}" style="float:left" height="200" width="200" align="middle" class="img-rounded">
+			</div>
+
+			<div class="col-md-offset-3 col-md-7 vcenter">
+				<div style="vertical-align:middle">
+				
+				<blockquote class="blockquote">{{meals.recipe.recipe_description}}</blockquote>
+				
+				</div>
+			</div>
+		</div>
+
+		<div class="col-md-12">
+			<br>
+		</div>
+
+		<h2>Ingredients</h2>
+		<div class="col-md-12">
+		{% for ingredient in meals.recipe.ingredients.ingredient %}
+			<li>
+				{{ ingredient.food_name }}: {{ ingredient.number_of_units|slice:":-2" }} {{ingredient.measurement_description}}
+			</li>
+		{% endfor %}
+		</div>
+
+		<div class="col-md-12">
+			<br>
+		</div>
+
+		<h2>Preparation Directions</h2>
+		<div class="col-md-12">
+		<p class="text-muted"><em>makes {{ meals.recipe.number_of_servings }} servings</p></em>
+		<ol>
+		{% for steps in meals.recipe.directions.direction %}
+			<li>{{steps.direction_description}}</li>
+		{% endfor %}
+		</ol>
+		</div>
+
+		<div class="col-md-12">
+			<br>
+		</div>
+		
+		<h2>Nutrition Information</h2>
+		<div class="col-md-12">
+		<p class="text-muted"><em>per {{ meals.recipe.serving_sizes.serving.serving_size }}</em></p>
+
+		{% for key, value in meals.recipe.serving_sizes.serving.items %}
+			{% if key == "fiber" or "carbohydrate" or "fat" or "trans_fat" or "sugar" or "protein" or "saturated_fat" or "polyunsaturated_fat" or "polyunsaturated_fat" %}
+				{% if key == "saturated_fat" %}
+					saturated fat:{{value}}g
+				{% elif key == "trans_fat" %}
+					trans fat: {{value}}g
+				{% elif key == "polyunsaturated_fat" %}
+					polyunsaturated fat: {{value}}g
+				{% elif key == "monounsaturated_fat" %}
+					monounsaturated fat: {{value}}g
+				{% else %}
+					{{key}}: {{ value }}g
+				{% endif %}
+
+			{% elif key == "cholesterol" or "sodium" or "potassium" %}
+				{{key}}: {{ value }}mg
+
+			{% elif key == "vitamin_a" or "vitamin_c" or "calcium" or "iron" %}
+				{% if key == "vitamin_a" %}
+					vitamin A:{{value}}% of daily recommended intake
+				{% elif key == "vitamin_c" %}
+					vitamin C:{{value}}% of daily recommended intake
+				{% else %}
+					{{key}}: {{value}}% of daily recommended intake
+				{% endif %}
+
+			{% elif key == "calories" %}
+				{{key}}: {{value}}kcal
+
+			{% elif key == "serving_size" %}
+				
+			{% endif %}
+			<br>
+		{% endfor %}
+		</div>
+	{% else %}
+		<p>No details found.</p>
+	{% endif %}
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "calorimeter_site/base.html" %}
+
+{% block content %}
+	<h1>Profile</h1>
+
+	<p>Username: {{ user.username }}</p>
+	<p>Password: ******</p>
+	<p>First name: {{ extraprofileinfo.first_name }}</p>
+	<p>Last name: {{ extraprofileinfo.last_name }}</p>
+	<p>Email address: {{ extraprofileinfo.email }}</p>
+	<p>Age: {{ extraprofileinfo.age }}</p>
+	<p>Gender: {{ extraprofileinfo.gender }}</p>
+	<p>Weight: {{ extraprofileinfo.weight }} lb</p>
+	<p>Height: {{ extraprofileinfo.height }} cm</p>
+
+	<a href="{% url 'calorimeter_site:editprofile' %}">Edit Profile</a>
+{% endblock %}

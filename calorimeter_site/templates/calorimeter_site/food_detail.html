@@ -1,0 +1,50 @@
+{% extends "calorimeter_site/base.html" %}
+
+{% block content %}
+
+	<h1>Detail for: {{ object_list.food.food_name }}</h1>
+
+	<hr>
+
+	{% if object_list %}
+		<h2>{{object_list.food.servings.serving.serving_description}}</h2>
+		<div class="col-md-12">
+		<ul class="list-group">
+		{% for key, value in object_list.food.servings.serving.items %}
+
+			{% if key == "calories" %}
+				<li class="list-group-item">calories: {{ value }} cal</li>
+				
+			{% elif key == "carbohydrate" %}
+				<li class="list-group-item">carbohydrate: {{ value }} grams</li>
+				
+			{% elif key == "protein" %}
+				<li class="list-group-item">protein: {{ value }} grams</li>
+				
+			{% elif key == "fat" %}
+				<li class="list-group-item">fat: {{ value }} grams</li>
+				
+			{% elif key == "saturated_fat" %}
+				<li class="list-group-item">saturated Fat: {{ value }} grams</li>
+
+			{% elif key == "cholesterol" %}
+				<li class="list-group-item">cholesterol: {{ value }} grams</li>
+
+			{% elif key == "sugar" %}
+				<li class="list-group-item">sugar: {{ value }} grams</li>
+
+			{% elif key == "sodium" %}
+				<li class="list-group-item">sodium: {{ value }} mg</li>
+
+			{% elif key == "potassium" %}
+				<li class="list-group-item">potassium: {{ value }} mg</li>
+
+			{% endif %}
+		{% endfor %}
+		</ul>
+		</div>
+	{% else %}
+		<p>No details found.</p>
+		</div>
+	{% endif %}
+{% endblock %}

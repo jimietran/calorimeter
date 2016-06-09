@@ -1,0 +1,16 @@
+{% extends "calorimeter_site/base.html" %}
+
+{% block content %}
+
+	<h1>Food Search</h1>
+	<h3>Found the following serving sizes for {{ object_list.food.food_name }}:</h3>
+
+	{% if object_list %}
+		{% for serve in object_list.food.servings.serving %}
+			<a href="{% url 'calorimeter_site:food_detail' %}">{{ serve.serving_description }}</a><br>
+		{% endfor %}
+	{% else %}
+		<p>No food fond.</p>
+	{% endif %}
+
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends "calorimeter_site/base.html" %}
+
+{% block content %}
+	<h1>Registration</h1>
+
+	<form method="POST" action="{% url 'calorimeter_site:register' %}">
+    	{% csrf_token %}
+		<p><i>Fields with a * beside them are required</i></p>
+
+		<br/>
+
+		<p>Username : {{userform.username}} * </p>
+		{% if userform.username.errors %}
+			<p>{{ userform.username.errors }}</p>	
+		{% endif %}
+
+		<p>Password : {{userform.password}} * </p>
+		{% if userform.password.errors %}
+			<p>{{ userform.password.errors }}</p>			
+		{% endif %}
+
+		<p>First Name : {{userprofileform.first_name}} </p>
+
+		<p>Last Name : {{userprofileform.last_name}} </p>
+
+		<p>Email : {{userprofileform.email}} </p>
+		{% if userprofileform.email.errors %}
+			<p>{{ userprofileform.email.errors }}</p>			
+		{% endif %}
+
+		<p>Age : {{userprofileform.age}} </p>
+		{% if userprofileform.age.errors %}
+			<p>{{ userprofileform.age.errors }}</p>			
+		{% endif %}
+
+		<p>Gender : {{userprofileform.gender}} </p>
+
+		<p>Weight (lb): {{userprofileform.weight}} </p>
+		{% if userprofileform.weight.errors %}
+			<p>{{ userprofileform.weight.errors }}</p>			
+		{% endif %}
+
+		<p>Height (cm): {{userprofileform.height}} </p>
+		{% if userprofileform.height.errors %}
+			<p>{{ userprofileform.height.errors }}</p>			
+		{% endif %}
+
+    <input type="submit" name="submit" value="Register" />
+</form>
+{% endblock %}
